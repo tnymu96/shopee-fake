@@ -1,0 +1,38 @@
+$mainColor: #ee4d2d;
+$textLightColor: #fff;
+
+.header-top-sticky {
+    background-color: $mainColor;
+    color: $textLightColor;
+    font-size: 13px;
+    line-height: 1.2;
+
+    .header-right,
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
+
+    span,
+    svg {
+        margin-right: 10px;
+        align-self: center;
+    }
+
+    .header-left svg {
+        margin-right: 2px;
+    }
+
+    .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px 0 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .btn-login {
+        cursor: pointer;
+    }
+}
