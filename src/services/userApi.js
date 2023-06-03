@@ -1,7 +1,7 @@
 import axios from "./customize-axios";
 
-const loginApi = (email, password) => {
-    return axios.post(`/login`, { email, password });
+const loginApi = (username, password) => {
+    return axios.post(`/auth/login`, { username: username, password: password });
 }
 
 const getSingleUser = (id) => {

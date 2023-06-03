@@ -1,16 +1,18 @@
 import '../../styles/header.scss';
+import logo from '../../styles/images/logo-shopee-white.png';
 
-import { FacebookOutlined, Instagram, Notifications, QuestionMark, Public } from '@mui/icons-material';
+import { FacebookOutlined, Instagram, Notifications, QuestionMark, Public, ShoppingCart } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import HeaderLogin from './HeaderLogin.tsx';
 import React, { useEffect, useState } from 'react';
 
+
 const Header = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState({
+        id: 0,
         avatar: "",
-        first_name: "",
-        last_name: ""
+        username: ""
     });
 
     useEffect(() => {
@@ -54,7 +56,7 @@ const Header = () => {
                         <Public />
                         <span>Tiếng Việt</span>
                         {
-                            user.first_name !== "" ?
+                            user.username ?
                                 <>
                                     <HeaderLogin user={user} />
                                 </>
@@ -67,8 +69,23 @@ const Header = () => {
                         }
 
                     </div>
-
                 </div>
+
+                <div className='wrap wrap-search d-flex'>
+                    <div><img src={logo} alt='Shopee' height={50} className='cursor' onClick={() => { navigate("/") }} /></div>
+                    <div className='w-100'>
+                        <div className='wrap-searchbar w-100'>
+                            <input type="text" className='w-100' placeholder='Nhập tìm kiếm ở đây...' />
+                            {/* <button>
+                                <Search color='white' />
+                            </button> */}
+                        </div>
+                    </div>
+                    <div>
+                        <ShoppingCart />
+                    </div>
+                </div>
+
             </header >
         </>
     )

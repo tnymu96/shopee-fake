@@ -33,10 +33,10 @@ const HeaderLogin = (props) => {
                     style={{ margin: 0, padding: 0 }}
                 >
                     <span style={{ marginLeft: 15 }}>
-                        <Avatar alt={props.user.first_name} src={props.user.avatar} sx={{ width: 25, height: 25 }} />
+                        <Avatar alt={props.user.name.firstname} src={props.user.avatar} sx={{ width: 25, height: 25 }} />
                     </span>
                     <span>
-                        {props.user.first_name + " " + props.user.last_name}
+                        {props.user.name.firstname + " " + props.user.name.lastname}
                     </span>
                 </IconButton>
             </Tooltip>

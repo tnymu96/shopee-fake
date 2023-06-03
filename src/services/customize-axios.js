@@ -1,11 +1,12 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://reqres.in/api'
+    baseURL: 'https://fakestoreapi.com'
 });
 
 instance.interceptors.response.use(function (response) {
-    return response.data ? response.data : { statusCode: response.status };
+    //return response.data ? response : { statusCode: response.status };
+    return response;
 }, function (error) {
     let res = {};
     if (error.response) {

@@ -51,3 +51,31 @@ $textLightColor: #fff;
         font-size: 15px;
     }
 }
+
+.wrap-search {
+    padding: 0px 0 18px;
+
+    .wrap-searchbar {
+        padding: 0 30px;
+    }
+
+    input {
+        border: 0;
+        border-color: #fff;
+        padding: 12px 15px;
+        border-radius: 2px;
+    }
+
+    button {
+        background-color: #fff;
+        border: 0;
+
+        svg {
+            margin: 0;
+        }
+    }
+}
+
+.cursor {
+    cursor: pointer;
+}

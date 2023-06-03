@@ -11,7 +11,7 @@ import { updateUser } from "../store/userSlice.ts";
 import { useNavigate } from 'react-router-dom';
 
 type Inputs = {
-    email: string,
+    userName: string,
     passWord: string,
 };
 
@@ -21,33 +21,32 @@ const Login = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
         defaultValues: {
-            email: 'eve.holt@reqres.in'
+            userName: 'johnd',
+            passWord: 'm38rmF$'
         }
     });
     const onSubmit: SubmitHandler<Inputs> = async data => {
-        let res = await loginApi(data.email.trim(), data.passWord);
-
-        if (res) {
+        let res = await loginApi(data.userName.trim(), data.passWord);
+        console.log(res);
+        if (res.data) {
             let user = await getSingleUser(4);
-            if (user) {
+            console.log(user);
+            if (user.data) {
                 localStorage.setItem('currentUser', JSON.stringify(user.data));
 
                 dispatch(updateUser({
-                    userName: data.email.trim(),
-                    firstName: user.data.first_name,
-                    lastName: user.data.last_name,
-                    email: user.data.email,
-                    avatar: user.data.avatar,
+                    userName: data.userName.trim()
                 }));
 
                 navigate("/");
             }
+            else
+                console.log(user.statusText);
 
         }
         else {
-
+            console.log(res.statusText);
         }
-
     }
 
     return (
@@ -65,11 +64,11 @@ const Login = () => {
                         <h5>Đăng nhập</h5>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='wrap-input'>
-                                <input {...register("email", { required: true })} placeholder='Tên đăng nhập' />
-                                {errors.email && <span className='text-error'>Vui lòng điền vào mục này.</span>}
+                                <input {...register("userName", { required: true })} placeholder='Tên đăng nhập' />
+                                {errors.userName && <span className='text-error'>Vui lòng điền vào mục này.</span>}
                             </div>
                             <div className='wrap-input'>
-                                <input {...register("passWord", { required: true })} placeholder='Mật khẩu' />
+                                <input {...register("passWord", { required: true })} placeholder='Mật khẩu' type='password' />
                                 {errors.passWord && <span className='text-error'>Vui lòng điền vào mục này.</span>}
                             </div>
                             <input type="submit" value="Đăng nhập" />
