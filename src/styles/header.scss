@@ -3,8 +3,8 @@ $textLightColor: #fff;
 
 .header-top-sticky {
     background-color: $mainColor;
-    color: $textLightColor;
-    font-size: 13px;
+    color: $textLightColor !important;
+    font-size: 13px !important;
     line-height: 1.2;
 
     .header-right,
@@ -34,5 +34,20 @@ $textLightColor: #fff;
 
     .btn-login {
         cursor: pointer;
+    }
+
+}
+
+#account-menu {
+    .MuiList-root li {
+        font-size: 13px;
+    }
+
+    .MuiListItemIcon-root {
+        min-width: 20px !important;
+    }
+
+    svg {
+        font-size: 15px;
     }
 }
