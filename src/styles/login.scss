@@ -68,6 +68,10 @@ $textLightColor: #fff;
         margin-bottom: 8px !important;
     }
 
+    form input[type="submit"]:disabled {
+        background-color: #dedede;
+    }
+
     form .wrap-input {
         margin-bottom: 20px !important;
     }

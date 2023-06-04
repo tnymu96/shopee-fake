@@ -1,11 +1,11 @@
 import '../../styles/header.scss';
 import logo from '../../styles/images/logo-shopee-white.png';
-
+import Badge from '@mui/material/Badge';
 import { FacebookOutlined, Instagram, Notifications, QuestionMark, Public, ShoppingCart } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import HeaderLogin from './HeaderLogin.tsx';
 import React, { useEffect, useState } from 'react';
-
+import { selectQuantityCart } from '../../store/cartSlide.ts';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -26,6 +26,9 @@ const Header = () => {
                 }));
             }
         }
+
+
+        console.log(selectQuantityCart);
     }, []);
 
 
@@ -82,7 +85,9 @@ const Header = () => {
                         </div>
                     </div>
                     <div>
-                        <ShoppingCart />
+                        <Badge badgeContent={3} color="success">
+                            <ShoppingCart />
+                        </Badge>
                     </div>
                 </div>
 

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material';
 import { Logout, Person } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
 const HeaderLogin = (props) => {
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState();
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
 
@@ -14,9 +14,12 @@ const HeaderLogin = (props) => {
     };
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleLogout = () => {
+        setAnchorEl(null);
         localStorage.removeItem("currentUser");
         navigate("/login");
-
     };
 
     return (
@@ -82,7 +85,7 @@ const HeaderLogin = (props) => {
                     Tài Khoản Của Tôi
                 </MenuItem>
 
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>

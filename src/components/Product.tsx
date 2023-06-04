@@ -1,60 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom";
+import { getSingleProduct } from "../services/productApi";
+import Header from "./header/Header.tsx";
+import Footer from "./Footer.tsx";
 import '../styles/product.scss';
-import { getAllProducts } from '../services/productApi';
+import { Rating } from "@mui/material";
+
+import { cartSlide, selectQuantityCart } from '../../store/cartSlide.ts';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from "../store/cartSlide.ts";
 
 const Product = () => {
+    const location = useLocation();
+    const answer_array = location.pathname.split("/"); // product/1
+    const [product, setProduct] = useState({
+        id: 0,
+        title: "",
+        category: "",
+        image: "",
+        rating: {
+            rate: 0,
+            count: 0
+        },
+        price: 0,
+        description: ""
+    });
 
-    const [listProducts, setListProducts] = useState([]);
+
+    const dispatch = useDispatch();
+    const todoList = useSelector(state => state.cart);
+
+    const handleButtonAddToCart = () => {
+        const action = addToCart({ quantity: 0 });
+        dispatch(action);
+        console.log(action);
+    }
 
     useEffect(() => {
-        getProducts();
+        getProduct(answer_array[2]);
     }, [])
 
-    const getProducts = async () => {
-        let res = await getAllProducts();
+    const getProduct = async (id) => {
+        let res = await getSingleProduct(id);
         if (res && res.data) {
-            setListProducts(res.data);
+            setProduct(res.data);
         }
     }
-    return <>
-        <div className='wrap'>
-            <div className='title'>
-                <span>Gợi ý hôm nay</span>
-            </div>
 
-            <div className='all-products'>
+    return (
+        <>
+            <Header />
+
+            <div className="wrap single-product">
                 <div className="row">
-                    {listProducts && listProducts.length > 0 &&
-                        listProducts.map((item, index) => {
-                            return (
-                                <>
-                                    <div className="col wrap-product" key={`product-${index}`}>
-                                        <div className="wrap-img">
-                                            <img className='img-ori' src={item.image} />
-                                            <img className='img-overlay' src="https://down-vn.img.susercontent.com/file/vn-50009109-532ca40ed75b598e9063e778e9a6d1ff" />
-                                        </div>
-                                        <div className='wrap-product-name'>
-                                            <div className='name'>
-                                                {item.title}
-                                            </div>
-                                            <div className='price-wrap d-flex align-items-center justify-content'>
-                                                <span className='price w-100'>
-                                                    {item.price} $
-                                                </span>
-                                                <span className='sold'>Đã bán {item.rating.count}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </>
-                            )
-                        })
-                    }
-                </div>
+                    <div className="col-4">
+                        <img src={product.image} alt={product.title} />
+                    </div>
+                    <div className="col-8">
+                        <div className="product-name">{product.title}</div>
+                        <div className="product-category"><span>Category:</span> {product.category}</div>
+                        <Rating name="read-only" value={product.rating.rate} readOnly />
+                        <div className="product-price">{product.price} $</div>
+                        <div className="product-description">{product.description}</div>
 
+                        <button className="add-to-cart" onClick={() => handleButtonAddToCart()}>
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
             </div>
 
-        </div>
-    </>
+            <Footer />
+        </>
+    )
 }
 
-export default Product;
+export default Product

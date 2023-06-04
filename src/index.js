@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from './pages/Login.tsx';
 import Home from './pages/Home.tsx';
+import Product from './components/Product.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="product/:id" element={<Product />} />
           <Route path="login" element={<Login />} />
           <Route index element={<Home />} />
         </Routes>

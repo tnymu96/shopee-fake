@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../styles/images/logo-shopee.png';
 import '../styles/login.scss';
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -16,16 +16,25 @@ type Inputs = {
 };
 
 const Login = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [textButtonLogin, setTextButtonLogin] = useState('Đăng nhập');
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
         defaultValues: {
             userName: 'johnd',
-            passWord: 'm38rmF$'
+            passWord: '1'
         }
     });
+
+    const handleIsLoading = (isLoading) => {
+        setIsLoading(isLoading);
+        isLoading ? setTextButtonLogin('Đang xử lý') : setTextButtonLogin('Đăng nhập');
+    }
     const onSubmit: SubmitHandler<Inputs> = async data => {
+        handleIsLoading(true);
+
         let res = await loginApi(data.userName.trim(), data.passWord);
         console.log(res);
         if (res.data) {
@@ -43,8 +52,11 @@ const Login = () => {
             else
                 console.log(user.statusText);
 
+            handleIsLoading(false);
+
         }
         else {
+            handleIsLoading(false);
             console.log(res.statusText);
         }
     }
@@ -71,7 +83,7 @@ const Login = () => {
                                 <input {...register("passWord", { required: true })} placeholder='Mật khẩu' type='password' />
                                 {errors.passWord && <span className='text-error'>Vui lòng điền vào mục này.</span>}
                             </div>
-                            <input type="submit" value="Đăng nhập" />
+                            <input type="submit" value={textButtonLogin} disabled={isLoading} />
                         </form>
                         <div className='d-flex action-forgetpass'>
                             <div className='text-start'>Quên mật khẩu</div>
