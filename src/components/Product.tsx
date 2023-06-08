@@ -31,9 +31,8 @@ const Product = () => {
     const todoList = useSelector(state => state.cart);
 
     const handleButtonAddToCart = () => {
-        const action = addToCart({ quantity: 0 });
+        const action = addToCart();
         dispatch(action);
-        console.log(action);
     }
 
     useEffect(() => {
@@ -63,7 +62,7 @@ const Product = () => {
                         <div className="product-price">{product.price} $</div>
                         <div className="product-description">{product.description}</div>
 
-                        <button className="add-to-cart" onClick={() => handleButtonAddToCart()}>
+                        <button className="add-to-cart" onClick={() => dispatch(addToCart(product))}>
                             Thêm vào giỏ hàng
                         </button>
                     </div>

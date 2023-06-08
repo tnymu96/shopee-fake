@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderLogin from './HeaderLogin.tsx';
 import React, { useEffect, useState } from 'react';
 import { selectQuantityCart } from '../../store/cartSlide.ts';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ const Header = () => {
         avatar: "",
         username: ""
     });
+
+    //const carts = useSelector((item) => item.cart)
 
     useEffect(() => {
         let tmp = localStorage.getItem('currentUser');
@@ -27,8 +30,6 @@ const Header = () => {
             }
         }
 
-
-        console.log(selectQuantityCart);
     }, []);
 
 
@@ -85,7 +86,7 @@ const Header = () => {
                         </div>
                     </div>
                     <div>
-                        <Badge badgeContent={3} color="success">
+                        <Badge badgeContent={0} color="success">
                             <ShoppingCart />
                         </Badge>
                     </div>

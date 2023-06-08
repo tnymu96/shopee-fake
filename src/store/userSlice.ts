@@ -6,7 +6,7 @@ const initialState = {
 
 // Config slice
 export const userSlice = createSlice({
-    name: "user",
+    name: "userSlide",
     initialState,
     reducers: {
         updateUser: (state, action) => {
