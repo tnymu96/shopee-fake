@@ -6,8 +6,7 @@ import Footer from "./Footer.tsx";
 import '../styles/product.scss';
 import { Rating } from "@mui/material";
 
-import { cartSlide, selectQuantityCart } from '../../store/cartSlide.ts';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addToCart } from "../store/cartSlide.ts";
 
 const Product = () => {
@@ -26,14 +25,7 @@ const Product = () => {
         description: ""
     });
 
-
     const dispatch = useDispatch();
-    const todoList = useSelector(state => state.cart);
-
-    const handleButtonAddToCart = () => {
-        const action = addToCart();
-        dispatch(action);
-    }
 
     useEffect(() => {
         getProduct(answer_array[2]);

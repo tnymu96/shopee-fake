@@ -1,0 +1,16 @@
+$mainColor: #ee4d2d;
+$textLightColor: #fff;
+
+.wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .page-title {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+}
+
+p {
+    margin-bottom: 0;
+}

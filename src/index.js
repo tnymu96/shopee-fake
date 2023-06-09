@@ -6,10 +6,13 @@ import { store } from "./store/index";
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Login from './pages/Login.tsx';
 import Home from './pages/Home.tsx';
 import Product from './components/Product.tsx';
+import Cart from './pages/Cart.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,9 +23,13 @@ root.render(
           <Route path="/" element={<Home />} />
           <Route path="product/:id" element={<Product />} />
           <Route path="login" element={<Login />} />
+          <Route path="cart" element={<Cart />} />
           <Route index element={<Home />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000} />
     </Provider>
   </React.StrictMode >
 );

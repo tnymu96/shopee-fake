@@ -5,7 +5,6 @@ import { FacebookOutlined, Instagram, Notifications, QuestionMark, Public, Shopp
 import { useNavigate } from 'react-router-dom';
 import HeaderLogin from './HeaderLogin.tsx';
 import React, { useEffect, useState } from 'react';
-import { selectQuantityCart } from '../../store/cartSlide.ts';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
@@ -16,7 +15,7 @@ const Header = () => {
         username: ""
     });
 
-    //const carts = useSelector((item) => item.cart)
+    const totalInCart = useSelector((state) => state.cartSlide.cartQty)
 
     useEffect(() => {
         let tmp = localStorage.getItem('currentUser');
@@ -85,8 +84,8 @@ const Header = () => {
                             </button> */}
                         </div>
                     </div>
-                    <div>
-                        <Badge badgeContent={0} color="success">
+                    <div onClick={() => navigate("/cart")} className='cusor'>
+                        <Badge badgeContent={totalInCart} color="success">
                             <ShoppingCart />
                         </Badge>
                     </div>
