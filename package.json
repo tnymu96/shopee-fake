@@ -2,6 +2,7 @@
   "name": "shopee-fake",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tnymu96.github.io/shopee-fake/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -15,6 +16,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "emmet": "^2.4.4",
+    "gh-pages": "^5.0.0",
     "i18next": "^22.5.1",
     "i18next-http-backend": "^2.2.1",
     "react": "^18.2.0",
