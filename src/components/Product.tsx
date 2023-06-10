@@ -9,7 +9,11 @@ import { Rating } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { addToCart } from "../store/cartSlide.ts";
 
+import { useTranslation } from 'react-i18next';
+
 const Product = () => {
+    const { t } = useTranslation();
+
     const location = useLocation();
     const answer_array = location.pathname.split("/"); // product/1
     const [product, setProduct] = useState({
@@ -49,13 +53,13 @@ const Product = () => {
                     </div>
                     <div className="col-8">
                         <div className="product-name">{product.title}</div>
-                        <div className="product-category"><span>Category:</span> {product.category}</div>
+                        <div className="product-category"><span>{t('content.category')}:</span> {product.category}</div>
                         <Rating name="read-only" value={product.rating.rate} readOnly />
                         <div className="product-price">{product.price} $</div>
                         <div className="product-description">{product.description}</div>
 
                         <button className="add-to-cart" onClick={() => dispatch(addToCart(product))}>
-                            Thêm vào giỏ hàng
+                            {t('content.add-to-cart')}
                         </button>
                     </div>
                 </div>

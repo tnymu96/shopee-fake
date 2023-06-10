@@ -14,23 +14,28 @@ import Home from './pages/Home.tsx';
 import Product from './components/Product.tsx';
 import Cart from './pages/Cart.tsx';
 
+import i18n from './locales/i18n';
+import { I18nextProvider } from 'react-i18next';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="product/:id" element={<Product />} />
-          <Route path="login" element={<Login />} />
-          <Route path="cart" element={<Cart />} />
-          <Route index element={<Home />} />
-        </Routes>
-      </BrowserRouter>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000} />
-    </Provider>
+    <I18nextProvider i18n={i18n}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="product/:id" element={<Product />} />
+            <Route path="login" element={<Login />} />
+            <Route path="cart" element={<Cart />} />
+            <Route index element={<Home />} />
+          </Routes>
+        </BrowserRouter>
+        <ToastContainer
+          position="top-center"
+          autoClose={2000} />
+      </Provider>
+    </I18nextProvider >
   </React.StrictMode >
 );
 

@@ -10,27 +10,32 @@ import { useDispatch } from "react-redux";
 import { updateUser } from "../store/userSlice.ts";
 import { useNavigate } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 type Inputs = {
     userName: string,
     passWord: string,
 };
 
 const Login = () => {
+    const { t } = useTranslation();
+
     const [isLoading, setIsLoading] = useState(false);
-    const [textButtonLogin, setTextButtonLogin] = useState('Đăng nhập');
+    const [textButtonLogin, setTextButtonLogin] = useState(t('content.login'));
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
         defaultValues: {
             userName: 'johnd',
-            passWord: '1'
+            passWord: 'johnd'
         }
     });
 
     const handleIsLoading = (isLoading) => {
         setIsLoading(isLoading);
-        isLoading ? setTextButtonLogin('Đang xử lý') : setTextButtonLogin('Đăng nhập');
+        isLoading ? setTextButtonLogin(t('content.login-processing')) : setTextButtonLogin(t('content.login'));
     }
     const onSubmit: SubmitHandler<Inputs> = async data => {
         handleIsLoading(true);
@@ -66,33 +71,33 @@ const Login = () => {
             <div className='top-page'>
                 <div className='d-flex align-items-center wrap'>
                     <img src={logo} alt='Shopee' height={50} className='p-2 cursor' onClick={() => { navigate("/") }} />
-                    <div className='p-2 fw-normal title-text'>Đăng nhập</div>
-                    <div className='ms-auto p-2 text-color-main'>Bạn cần giúp đỡ?</div>
+                    <div className='p-2 fw-normal title-text'>{t('content.login')}</div>
+                    <div className='ms-auto p-2 text-color-main'>{t('content.need-help')}</div>
                 </div>
             </div >
             <div className='main-page'>
                 <div className='wrap d-flex align-items-center justify-content-end'>
                     <div className='section-login'>
-                        <h5>Đăng nhập</h5>
+                        <h5>{t('content.login')}</h5>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='wrap-input'>
-                                <input {...register("userName", { required: true })} placeholder='Tên đăng nhập' />
-                                {errors.userName && <span className='text-error'>Vui lòng điền vào mục này.</span>}
+                                <input {...register("userName", { required: true })} placeholder={t('content.login')} />
+                                {errors.userName && <span className='text-error'>{t('content.error-login')}</span>}
                             </div>
                             <div className='wrap-input'>
-                                <input {...register("passWord", { required: true })} placeholder='Mật khẩu' type='password' />
-                                {errors.passWord && <span className='text-error'>Vui lòng điền vào mục này.</span>}
+                                <input {...register("passWord", { required: true })} placeholder={t('content.password')} type='password' />
+                                {errors.passWord && <span className='text-error'>{t('content.error-login')}</span>}
                             </div>
                             <input type="submit" value={textButtonLogin} disabled={isLoading} />
                         </form>
                         <div className='d-flex action-forgetpass'>
-                            <div className='text-start'>Quên mật khẩu</div>
-                            <div className='text-end'>Đăng nhập với SMS</div>
+                            <div className='text-start'>{t('content.forgot-pass')}</div>
+                            <div className='text-end'>{t('content.login-sms')}</div>
                         </div>
 
                         <div className='text-or d-flex align-items-center'>
                             <div className='first'></div>
-                            <span className='text'>hoặc</span>
+                            <span className='text'>{t('content.or')}</span>
                             <div className='last'></div>
                         </div>
 
@@ -107,7 +112,7 @@ const Login = () => {
                             </button>
                         </div>
 
-                        <div className='know-shopee'>Bạn mới biết đến Shopee? <span className='cursor'>Đăng ký</span></div>
+                        <div className='know-shopee'>{t('content.new-to-shopee')} <span className='cursor'>{t('content.sign-up')}</span></div>
                     </div>
                 </div >
             </div >

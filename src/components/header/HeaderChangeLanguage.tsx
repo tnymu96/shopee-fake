@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Avatar, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material';
-import { Logout, Person } from '@mui/icons-material';
+import { Logout, Person, Public } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-const HeaderLogin = (props) => {
-    const { t } = useTranslation();
+const HeaderChangeLanguage = (props) => {
+    const { t, i18n } = useTranslation();
 
     const [anchorEl, setAnchorEl] = useState();
     const open = Boolean(anchorEl);
-    const navigate = useNavigate();
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -18,15 +17,13 @@ const HeaderLogin = (props) => {
         setAnchorEl(null);
     };
 
-    const handleLogout = () => {
-        setAnchorEl(null);
-        localStorage.removeItem("currentUser");
-        navigate("/login");
-    };
+    const changLanguage = (lng: 'en' | 'vi') => {
+        i18n.changeLanguage(lng);
+    }
 
     return (
         <>
-            <Tooltip title="Account settings">
+            <Tooltip title={t('content.change-language')}>
                 <IconButton
                     onClick={handleClick}
                     size="small"
@@ -37,12 +34,8 @@ const HeaderLogin = (props) => {
                     className='header-top-sticky'
                     style={{ margin: 0, padding: 0 }}
                 >
-                    <span style={{ marginLeft: 15 }}>
-                        <Avatar alt={props.user.name.firstname} src={props.user.avatar} sx={{ width: 25, height: 25 }} />
-                    </span>
-                    <span>
-                        {props.user.name.firstname + " " + props.user.name.lastname}
-                    </span>
+                    <Public />
+                    <span>{t('content.language')}</span>
                 </IconButton>
             </Tooltip>
             <Menu
@@ -80,22 +73,16 @@ const HeaderLogin = (props) => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
 
-                <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                        <Person fontSize="small" />
-                    </ListItemIcon>
-                    {t('content.my-account')}
+                <MenuItem onClick={() => changLanguage('vi')}>
+                    Tiếng Việt
                 </MenuItem>
 
-                <MenuItem onClick={handleLogout}>
-                    <ListItemIcon>
-                        <Logout fontSize="small" />
-                    </ListItemIcon>
-                    {t('content.logout')}
+                <MenuItem onClick={() => changLanguage('en')}>
+                    English
                 </MenuItem>
             </Menu>
         </>
     )
 }
 
-export default HeaderLogin
+export default HeaderChangeLanguage

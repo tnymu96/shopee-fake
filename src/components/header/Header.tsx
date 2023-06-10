@@ -6,8 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import HeaderLogin from './HeaderLogin.tsx';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import HeaderChangeLanguage from './HeaderChangeLanguage.tsx';
 
 const Header = () => {
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
     const [user, setUser] = useState({
         id: 0,
@@ -41,23 +45,22 @@ const Header = () => {
             <header className='header-top-sticky'>
                 <div className='wrap'>
                     <div className='header-right'>
-                        <span>Kênh người bán</span>
+                        <span>{t('content.seller-center')}</span>
                         <span>|</span>
-                        <span>Trở thành Người bán Shopee</span>
+                        <span>{t('content.start-selling')}</span>
                         <span>|</span>
-                        <span>Tải ứng dụng</span>
+                        <span>{t('content.download')}</span>
                         <span>|</span>
-                        <span>Kết nối</span>
+                        <span>{t('content.follow-on')}</span>
                         <FacebookOutlined fontSize='small' /> <Instagram fontSize='small' />
                     </div>
 
                     <div className='header-left'>
                         <Notifications fontSize='small' />
-                        <span>Thông Báo</span>
+                        <span>{t('content.noti')}</span>
                         <QuestionMark fontSize='small' />
-                        <span>Hỗ Trợ</span>
-                        <Public />
-                        <span>Tiếng Việt</span>
+                        <span>{t('content.help')}</span>
+                        <HeaderChangeLanguage />
                         {
                             user.username ?
                                 <>
@@ -66,8 +69,8 @@ const Header = () => {
                                 :
                                 <>
                                     <span>|</span>
-                                    <span>Đăng Ký</span>
-                                    <span className='btn-login' onClick={() => handleButtonLogin()}>Đăng nhập</span>
+                                    <span>{t('content.sign-up')}</span>
+                                    <span className='btn-login' onClick={() => handleButtonLogin()}>{t('content.login')}</span>
                                 </>
                         }
 
@@ -78,7 +81,7 @@ const Header = () => {
                     <div><img src={logo} alt='Shopee' height={50} className='cursor' onClick={() => { navigate("/") }} /></div>
                     <div className='w-100'>
                         <div className='wrap-searchbar w-100'>
-                            <input type="text" className='w-100' placeholder='Nhập tìm kiếm ở đây...' />
+                            <input type="text" className='w-100' placeholder={t('content.enter-text-search')} />
                             {/* <button>
                                 <Search color='white' />
                             </button> */}
